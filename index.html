@@ -1,913 +1,1519 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OWIN - Complete Housing Society Management Solutions</title>
-    <meta name="description" content="Professional audit, taxation, legal compliance, and management services for Co-operative Housing Societies in Maharashtra">
+    <meta
+      name="description"
+      content="Professional audit, taxation, legal compliance, and management services for Co-operative Housing Societies in Maharashtra"
+    />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
         }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
         }
-        
-        .fade-in-up {
-            animation: fadeInUp 0.8s ease-out;
+        50% {
+          transform: translateY(-20px);
         }
-        
-        .float {
-            animation: float 3s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
         }
-        
-        .pulse-slow {
-            animation: pulse 2s ease-in-out infinite;
+        50% {
+          transform: scale(1.05);
         }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-        
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .service-card {
-            transition: all 0.3s ease;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-        
-        .step-indicator {
-            transition: all 0.3s ease;
-        }
-        
-        .step-active {
-            background: #3b82f6;
-            color: white;
-        }
-        
-        .step-completed {
-            background: #10b981;
-            color: white;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
-        
+      }
+
+      .fade-in-up {
+        animation: fadeInUp 0.8s ease-out;
+      }
+
+      .float {
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .pulse-slow {
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      .gradient-bg {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+
+      .glass-effect {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .service-card {
+        transition: all 0.3s ease;
+      }
+
+      .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .step-indicator {
+        transition: all 0.3s ease;
+      }
+
+      .step-active {
+        background: #3b82f6;
+        color: white;
+      }
+
+      .step-completed {
+        background: #10b981;
+        color: white;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .whatsapp-float {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        bottom: 40px;
+        right: 40px;
+        background-color: #25d366;
+        color: #fff;
+        border-radius: 50px;
+        text-align: center;
+        font-size: 30px;
+        box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
+        z-index: 100;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .whatsapp-float:hover {
+        transform: scale(1.1);
+        box-shadow: 2px 2px 30px rgba(37, 211, 102, 0.5);
+      }
+
+      @media (max-width: 768px) {
         .whatsapp-float {
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 40px;
-            right: 40px;
-            background-color: #25d366;
-            color: #FFF;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 30px;
-            box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
-            z-index: 100;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+          width: 50px;
+          height: 50px;
+          bottom: 20px;
+          right: 20px;
+          font-size: 25px;
         }
-        
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            box-shadow: 2px 2px 30px rgba(37, 211, 102, 0.5);
-        }
-        
-        @media (max-width: 768px) {
-            .whatsapp-float {
-                width: 50px;
-                height: 50px;
-                bottom: 20px;
-                right: 20px;
-                font-size: 25px;
-            }
-        }
+      }
     </style>
-</head>
-<body class="font-sans antialiased">
-    
+  </head>
+  <body class="font-sans antialiased">
     <!-- Navigation -->
     <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <span class="text-2xl font-bold text-blue-600">OWIN</span>
-                </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="text-gray-700 hover:text-blue-600 transition">Home</a>
-                    <a href="#about" class="text-gray-700 hover:text-blue-600 transition">About</a>
-                    <a href="#services" class="text-gray-700 hover:text-blue-600 transition">Services</a>
-                    <a href="#testimonials" class="text-gray-700 hover:text-blue-600 transition">Testimonials</a>
-                    <a href="#contact" class="text-gray-700 hover:text-blue-600 transition">Contact</a>
-                    <button onclick="openEnquiryForm()" class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition">
-                        Get Started
-                    </button>
-                </div>
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-gray-700">
-                        <i class="fas fa-bars text-2xl"></i>
-                    </button>
-                </div>
-            </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex items-center">
+            <span class="text-2xl font-bold text-blue-600">OWIN</span>
+          </div>
+          <div class="hidden md:flex items-center space-x-8">
+            <a href="#home" class="text-gray-700 hover:text-blue-600 transition"
+              >Home</a
+            >
+            <a
+              href="#about"
+              class="text-gray-700 hover:text-blue-600 transition"
+              >About</a
+            >
+            <a
+              href="#services"
+              class="text-gray-700 hover:text-blue-600 transition"
+              >Services</a
+            >
+            <a
+              href="#testimonials"
+              class="text-gray-700 hover:text-blue-600 transition"
+              >Testimonials</a
+            >
+            <a
+              href="#contact"
+              class="text-gray-700 hover:text-blue-600 transition"
+              >Contact</a
+            >
+            <button
+              onclick="openEnquiryForm()"
+              class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition"
+            >
+              Get Started
+            </button>
+          </div>
+          <div class="md:hidden flex items-center">
+            <button id="mobile-menu-btn" class="text-gray-700">
+              <i class="fas fa-bars text-2xl"></i>
+            </button>
+          </div>
         </div>
-        
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white">
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="#home" class="block px-3 py-2 text-gray-700 hover:bg-blue-50">Home</a>
-                <a href="#about" class="block px-3 py-2 text-gray-700 hover:bg-blue-50">About</a>
-                <a href="#services" class="block px-3 py-2 text-gray-700 hover:bg-blue-50">Services</a>
-                <a href="#testimonials" class="block px-3 py-2 text-gray-700 hover:bg-blue-50">Testimonials</a>
-                <a href="#contact" class="block px-3 py-2 text-gray-700 hover:bg-blue-50">Contact</a>
-                <button onclick="openEnquiryForm()" class="w-full text-left px-3 py-2 bg-blue-600 text-white rounded">
-                    Get Started
-                </button>
-            </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden bg-white">
+        <div class="px-2 pt-2 pb-3 space-y-1">
+          <a href="#home" class="block px-3 py-2 text-gray-700 hover:bg-blue-50"
+            >Home</a
+          >
+          <a
+            href="#about"
+            class="block px-3 py-2 text-gray-700 hover:bg-blue-50"
+            >About</a
+          >
+          <a
+            href="#services"
+            class="block px-3 py-2 text-gray-700 hover:bg-blue-50"
+            >Services</a
+          >
+          <a
+            href="#testimonials"
+            class="block px-3 py-2 text-gray-700 hover:bg-blue-50"
+            >Testimonials</a
+          >
+          <a
+            href="#contact"
+            class="block px-3 py-2 text-gray-700 hover:bg-blue-50"
+            >Contact</a
+          >
+          <button
+            onclick="openEnquiryForm()"
+            class="w-full text-left px-3 py-2 bg-blue-600 text-white rounded"
+          >
+            Get Started
+          </button>
         </div>
+      </div>
     </nav>
 
     <!-- Hero Section -->
     <section id="home" class="pt-16 gradient-bg min-h-screen flex items-center">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="text-white fade-in-up">
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                        One Solution for All Your Housing Society Responsibilities
-                    </h1>
-                    <p class="text-xl md:text-2xl mb-8 text-gray-100">
-                        Complete end-to-end society management, audit, taxation & legal compliance services for Co-operative Housing Societies in Maharashtra
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <button onclick="openEnquiryForm()" class="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition transform hover:scale-105">
-                            Get Started
-                        </button>
-                        <button onclick="openEnquiryForm()" class="glass-effect text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-blue-600 transition">
-                            Free Consultation
-                        </button>
-                    </div>
-                </div>
-                <div class="float hidden md:block">
-                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600" alt="Housing Society" class="rounded-lg shadow-2xl">
-                </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="text-white fade-in-up">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              One Solution for All Your Housing Society Responsibilities
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 text-gray-100">
+              Complete end-to-end society management, audit, taxation & legal
+              compliance services for Co-operative Housing Societies in
+              Maharashtra
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4">
+              <button
+                onclick="openEnquiryForm()"
+                class="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition transform hover:scale-105"
+              >
+                Get Started
+              </button>
+              <button
+                onclick="openEnquiryForm()"
+                class="glass-effect text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-blue-600 transition"
+              >
+                Free Consultation
+              </button>
             </div>
+          </div>
+          <div class="float hidden md:block">
+            <img
+              src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600"
+              alt="Housing Society"
+              class="rounded-lg shadow-2xl"
+            />
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 fade-in-up">
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">About OWIN</h2>
-                <div class="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Your Trusted Partner in Housing Society Management
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600" alt="Professional Services" class="rounded-lg shadow-xl">
-                </div>
-                <div class="space-y-6">
-                    <p class="text-lg text-gray-700 leading-relaxed">
-                        <strong class="text-blue-600">OWIN</strong> is a one-stop solution for managing all responsibilities of a Co-operative Housing Society. From audits, taxation, statutory compliance, legal services, to daily society documentation — we simplify society management with accuracy, transparency, and compliance.
-                    </p>
-                    <div class="grid grid-cols-2 gap-6">
-                        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition">
-                            <i class="fas fa-shield-alt text-3xl text-blue-600 mb-3"></i>
-                            <h4 class="font-semibold text-gray-900 mb-2">Compliance Expertise</h4>
-                            <p class="text-gray-600 text-sm">Maharashtra Co-operative Act specialists</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition">
-                            <i class="fas fa-users text-3xl text-blue-600 mb-3"></i>
-                            <h4 class="font-semibold text-gray-900 mb-2">Reduced Burden</h4>
-                            <p class="text-gray-600 text-sm">We handle everything for your committee</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition">
-                            <i class="fas fa-check-circle text-3xl text-blue-600 mb-3"></i>
-                            <h4 class="font-semibold text-gray-900 mb-2">Transparent Process</h4>
-                            <p class="text-gray-600 text-sm">Clear communication at every step</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition">
-                            <i class="fas fa-clock text-3xl text-blue-600 mb-3"></i>
-                            <h4 class="font-semibold text-gray-900 mb-2">Time-Saving</h4>
-                            <p class="text-gray-600 text-sm">Focus on what matters most</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 fade-in-up">
+          <h2 class="text-4xl font-bold text-gray-900 mb-4">About OWIN</h2>
+          <div class="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Your Trusted Partner in Housing Society Management
+          </p>
         </div>
+
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <img
+              src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600"
+              alt="Professional Services"
+              class="rounded-lg shadow-xl"
+            />
+          </div>
+          <div class="space-y-6">
+            <p class="text-lg text-gray-700 leading-relaxed">
+              <strong class="text-blue-600">OWIN</strong> is a one-stop solution
+              for managing all responsibilities of a Co-operative Housing
+              Society. From audits, taxation, statutory compliance, legal
+              services, to daily society documentation — we simplify society
+              management with accuracy, transparency, and compliance.
+            </p>
+            <div class="grid grid-cols-2 gap-6">
+              <div
+                class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition"
+              >
+                <i class="fas fa-shield-alt text-3xl text-blue-600 mb-3"></i>
+                <h4 class="font-semibold text-gray-900 mb-2">
+                  Compliance Expertise
+                </h4>
+                <p class="text-gray-600 text-sm">
+                  Maharashtra Co-operative Act specialists
+                </p>
+              </div>
+              <div
+                class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition"
+              >
+                <i class="fas fa-users text-3xl text-blue-600 mb-3"></i>
+                <h4 class="font-semibold text-gray-900 mb-2">Reduced Burden</h4>
+                <p class="text-gray-600 text-sm">
+                  We handle everything for your committee
+                </p>
+              </div>
+              <div
+                class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition"
+              >
+                <i class="fas fa-check-circle text-3xl text-blue-600 mb-3"></i>
+                <h4 class="font-semibold text-gray-900 mb-2">
+                  Transparent Process
+                </h4>
+                <p class="text-gray-600 text-sm">
+                  Clear communication at every step
+                </p>
+              </div>
+              <div
+                class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition"
+              >
+                <i class="fas fa-clock text-3xl text-blue-600 mb-3"></i>
+                <h4 class="font-semibold text-gray-900 mb-2">Time-Saving</h4>
+                <p class="text-gray-600 text-sm">Focus on what matters most</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Services Section -->
     <section id="services" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
-                <div class="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
-                <p class="text-xl text-gray-600">Comprehensive Solutions for Every Society Need</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Audit Services -->
-                <div class="service-card bg-gradient-to-br from-blue-50 to-white p-8 rounded-xl shadow-lg">
-                    <div class="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-file-invoice text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Audit Services</h3>
-                    <ul class="space-y-2 text-gray-700">
-                        <li><i class="fas fa-check text-blue-600 mr-2"></i>Statutory Audit</li>
-                        <li><i class="fas fa-check text-blue-600 mr-2"></i>Internal Audit</li>
-                        <li><i class="fas fa-check text-blue-600 mr-2"></i>Tax Audit</li>
-                        <li><i class="fas fa-check text-blue-600 mr-2"></i>GST Audit</li>
-                        <li><i class="fas fa-check text-blue-600 mr-2"></i>Audit Rectification Reports</li>
-                    </ul>
-                </div>
-
-                <!-- Internal Documentation -->
-                <div class="service-card bg-gradient-to-br from-purple-50 to-white p-8 rounded-xl shadow-lg">
-                    <div class="bg-purple-600 w-16 h-16 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-folder-open text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Internal Documentation</h3>
-                    <ul class="space-y-2 text-gray-700">
-                        <li><i class="fas fa-check text-purple-600 mr-2"></i>NOC Work</li>
-                        <li><i class="fas fa-check text-purple-600 mr-2"></i>Transfer File Verification</li>
-                        <li><i class="fas fa-check text-purple-600 mr-2"></i>No Dues Certificate</li>
-                        <li><i class="fas fa-check text-purple-600 mr-2"></i>Maintenance Notices</li>
-                        <li><i class="fas fa-check text-purple-600 mr-2"></i>Builder Handover Support</li>
-                        <li><i class="fas fa-check text-purple-600 mr-2"></i>Membership Forms</li>
-                    </ul>
-                </div>
-
-                <!-- Taxation Services -->
-                <div class="service-card bg-gradient-to-br from-green-50 to-white p-8 rounded-xl shadow-lg">
-                    <div class="bg-green-600 w-16 h-16 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-calculator text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Taxation Services</h3>
-                    <ul class="space-y-2 text-gray-700">
-                        <li><i class="fas fa-check text-green-600 mr-2"></i>TDS Return Filing</li>
-                        <li><i class="fas fa-check text-green-600 mr-2"></i>Income Tax Returns</li>
-                        <li><i class="fas fa-check text-green-600 mr-2"></i>GST Return Filing</li>
-                        <li><i class="fas fa-check text-green-600 mr-2"></i>TAN Application</li>
-                        <li><i class="fas fa-check text-green-600 mr-2"></i>PAN Application</li>
-                        <li><i class="fas fa-check text-green-600 mr-2"></i>GST Registration</li>
-                    </ul>
-                </div>
-
-                <!-- Legal Services -->
-                <div class="service-card bg-gradient-to-br from-red-50 to-white p-8 rounded-xl shadow-lg">
-                    <div class="bg-red-600 w-16 h-16 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-gavel text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Legal & Compliance</h3>
-                    <ul class="space-y-2 text-gray-700">
-                        <li><i class="fas fa-check text-red-600 mr-2"></i>Society Registration</li>
-                        <li><i class="fas fa-check text-red-600 mr-2"></i>Conveyance Deed</li>
-                        <li><i class="fas fa-check text-red-600 mr-2"></i>Society Elections</li>
-                        <li><i class="fas fa-check text-red-600 mr-2"></i>Flat Transfer Files</li>
-                        <li><i class="fas fa-check text-red-600 mr-2"></i>Bye-laws Adoption</li>
-                        <li><i class="fas fa-check text-red-600 mr-2"></i>101 Recovery Cases</li>
-                    </ul>
-                </div>
-
-                <!-- Statutory Registers -->
-                <div class="service-card bg-gradient-to-br from-yellow-50 to-white p-8 rounded-xl shadow-lg">
-                    <div class="bg-yellow-600 w-16 h-16 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-book text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Statutory Registers</h3>
-                    <ul class="space-y-2 text-gray-700">
-                        <li><i class="fas fa-check text-yellow-600 mr-2"></i>Form I & J Register</li>
-                        <li><i class="fas fa-check text-yellow-600 mr-2"></i>Share Register</li>
-                        <li><i class="fas fa-check text-yellow-600 mr-2"></i>Nomination Register</li>
-                        <li><i class="fas fa-check text-yellow-600 mr-2"></i>Investment Register</li>
-                        <li><i class="fas fa-check text-yellow-600 mr-2"></i>Share Certificates</li>
-                        <li><i class="fas fa-check text-yellow-600 mr-2"></i>Online & Offline Support</li>
-                    </ul>
-                </div>
-
-                <!-- Other Services -->
-                <div class="service-card bg-gradient-to-br from-indigo-50 to-white p-8 rounded-xl shadow-lg">
-                    <div class="bg-indigo-600 w-16 h-16 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-building text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Society Management</h3>
-                    <ul class="space-y-2 text-gray-700">
-                        <li><i class="fas fa-check text-indigo-600 mr-2"></i>NOC Issuance</li>
-                        <li><i class="fas fa-check text-indigo-600 mr-2"></i>Outstanding Reminders</li>
-                        <li><i class="fas fa-check text-indigo-600 mr-2"></i>AGM/SGM Notices</li>
-                        <li><i class="fas fa-check text-indigo-600 mr-2"></i>Meeting Minutes</li>
-                        <li><i class="fas fa-check text-indigo-600 mr-2"></i>Co-operative Act Consultation</li>
-                    </ul>
-                </div>
-            </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
+          <div class="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
+          <p class="text-xl text-gray-600">
+            Comprehensive Solutions for Every Society Need
+          </p>
         </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Audit Services -->
+          <div
+            class="service-card bg-gradient-to-br from-blue-50 to-white p-8 rounded-xl shadow-lg"
+          >
+            <div
+              class="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center mb-6"
+            >
+              <i class="fas fa-file-invoice text-white text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">
+              Audit Services
+            </h3>
+            <ul class="space-y-2 text-gray-700">
+              <li>
+                <i class="fas fa-check text-blue-600 mr-2"></i>Statutory Audit
+              </li>
+              <li>
+                <i class="fas fa-check text-blue-600 mr-2"></i>Internal Audit
+              </li>
+              <li><i class="fas fa-check text-blue-600 mr-2"></i>Tax Audit</li>
+              <li><i class="fas fa-check text-blue-600 mr-2"></i>GST Audit</li>
+              <li>
+                <i class="fas fa-check text-blue-600 mr-2"></i>Audit
+                Rectification Reports
+              </li>
+            </ul>
+          </div>
+
+          <!-- Internal Documentation -->
+          <div
+            class="service-card bg-gradient-to-br from-purple-50 to-white p-8 rounded-xl shadow-lg"
+          >
+            <div
+              class="bg-purple-600 w-16 h-16 rounded-full flex items-center justify-center mb-6"
+            >
+              <i class="fas fa-folder-open text-white text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">
+              Internal Documentation
+            </h3>
+            <ul class="space-y-2 text-gray-700">
+              <li><i class="fas fa-check text-purple-600 mr-2"></i>NOC Work</li>
+              <li>
+                <i class="fas fa-check text-purple-600 mr-2"></i>Transfer File
+                Verification
+              </li>
+              <li>
+                <i class="fas fa-check text-purple-600 mr-2"></i>No Dues
+                Certificate
+              </li>
+              <li>
+                <i class="fas fa-check text-purple-600 mr-2"></i>Maintenance
+                Notices
+              </li>
+              <li>
+                <i class="fas fa-check text-purple-600 mr-2"></i>Builder
+                Handover Support
+              </li>
+              <li>
+                <i class="fas fa-check text-purple-600 mr-2"></i>Membership
+                Forms
+              </li>
+            </ul>
+          </div>
+
+          <!-- Taxation Services -->
+          <div
+            class="service-card bg-gradient-to-br from-green-50 to-white p-8 rounded-xl shadow-lg"
+          >
+            <div
+              class="bg-green-600 w-16 h-16 rounded-full flex items-center justify-center mb-6"
+            >
+              <i class="fas fa-calculator text-white text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">
+              Taxation Services
+            </h3>
+            <ul class="space-y-2 text-gray-700">
+              <li>
+                <i class="fas fa-check text-green-600 mr-2"></i>TDS Return
+                Filing
+              </li>
+              <li>
+                <i class="fas fa-check text-green-600 mr-2"></i>Income Tax
+                Returns
+              </li>
+              <li>
+                <i class="fas fa-check text-green-600 mr-2"></i>GST Return
+                Filing
+              </li>
+              <li>
+                <i class="fas fa-check text-green-600 mr-2"></i>TAN Application
+              </li>
+              <li>
+                <i class="fas fa-check text-green-600 mr-2"></i>PAN Application
+              </li>
+              <li>
+                <i class="fas fa-check text-green-600 mr-2"></i>GST Registration
+              </li>
+            </ul>
+          </div>
+
+          <!-- Legal Services -->
+          <div
+            class="service-card bg-gradient-to-br from-red-50 to-white p-8 rounded-xl shadow-lg"
+          >
+            <div
+              class="bg-red-600 w-16 h-16 rounded-full flex items-center justify-center mb-6"
+            >
+              <i class="fas fa-gavel text-white text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">
+              Legal & Compliance
+            </h3>
+            <ul class="space-y-2 text-gray-700">
+              <li>
+                <i class="fas fa-check text-red-600 mr-2"></i>Society
+                Registration
+              </li>
+              <li>
+                <i class="fas fa-check text-red-600 mr-2"></i>Conveyance Deed
+              </li>
+              <li>
+                <i class="fas fa-check text-red-600 mr-2"></i>Society Elections
+              </li>
+              <li>
+                <i class="fas fa-check text-red-600 mr-2"></i>Flat Transfer
+                Files
+              </li>
+              <li>
+                <i class="fas fa-check text-red-600 mr-2"></i>Bye-laws Adoption
+              </li>
+              <li>
+                <i class="fas fa-check text-red-600 mr-2"></i>101 Recovery Cases
+              </li>
+            </ul>
+          </div>
+
+          <!-- Statutory Registers -->
+          <div
+            class="service-card bg-gradient-to-br from-yellow-50 to-white p-8 rounded-xl shadow-lg"
+          >
+            <div
+              class="bg-yellow-600 w-16 h-16 rounded-full flex items-center justify-center mb-6"
+            >
+              <i class="fas fa-book text-white text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">
+              Statutory Registers
+            </h3>
+            <ul class="space-y-2 text-gray-700">
+              <li>
+                <i class="fas fa-check text-yellow-600 mr-2"></i>Form I & J
+                Register
+              </li>
+              <li>
+                <i class="fas fa-check text-yellow-600 mr-2"></i>Share Register
+              </li>
+              <li>
+                <i class="fas fa-check text-yellow-600 mr-2"></i>Nomination
+                Register
+              </li>
+              <li>
+                <i class="fas fa-check text-yellow-600 mr-2"></i>Investment
+                Register
+              </li>
+              <li>
+                <i class="fas fa-check text-yellow-600 mr-2"></i>Share
+                Certificates
+              </li>
+              <li>
+                <i class="fas fa-check text-yellow-600 mr-2"></i>Online &
+                Offline Support
+              </li>
+            </ul>
+          </div>
+
+          <!-- Other Services -->
+          <div
+            class="service-card bg-gradient-to-br from-indigo-50 to-white p-8 rounded-xl shadow-lg"
+          >
+            <div
+              class="bg-indigo-600 w-16 h-16 rounded-full flex items-center justify-center mb-6"
+            >
+              <i class="fas fa-building text-white text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">
+              Society Management
+            </h3>
+            <ul class="space-y-2 text-gray-700">
+              <li>
+                <i class="fas fa-check text-indigo-600 mr-2"></i>NOC Issuance
+              </li>
+              <li>
+                <i class="fas fa-check text-indigo-600 mr-2"></i>Outstanding
+                Reminders
+              </li>
+              <li>
+                <i class="fas fa-check text-indigo-600 mr-2"></i>AGM/SGM Notices
+              </li>
+              <li>
+                <i class="fas fa-check text-indigo-600 mr-2"></i>Meeting Minutes
+              </li>
+              <li>
+                <i class="fas fa-check text-indigo-600 mr-2"></i>Co-operative
+                Act Consultation
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Why Choose Us -->
     <section class="py-20 bg-blue-600 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4">Why Choose OWIN?</h2>
-                <div class="w-20 h-1 bg-white mx-auto"></div>
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="text-center p-6">
-                    <div class="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 pulse-slow">
-                        <i class="fas fa-trophy text-blue-600 text-3xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">One-Stop Solution</h3>
-                    <p class="text-blue-100">Complete compliance services under one roof - audit, legal, taxation & documentation</p>
-                </div>
-                <div class="text-center p-6">
-                    <div class="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 pulse-slow">
-                        <i class="fas fa-user-tie text-blue-600 text-3xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">Expert Team</h3>
-                    <p class="text-blue-100">Specialized professionals with deep knowledge of Maharashtra Co-operative Act</p>
-                </div>
-                <div class="text-center p-6">
-                    <div class="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 pulse-slow">
-                        <i class="fas fa-headset text-blue-600 text-3xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">24/7 Support</h3>
-                    <p class="text-blue-100">Online and offline support whenever you need assistance</p>
-                </div>
-            </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold mb-4">Why Choose OWIN?</h2>
+          <div class="w-20 h-1 bg-white mx-auto"></div>
         </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="text-center p-6">
+            <div
+              class="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 pulse-slow"
+            >
+              <i class="fas fa-trophy text-blue-600 text-3xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-4">One-Stop Solution</h3>
+            <p class="text-blue-100">
+              Complete compliance services under one roof - audit, legal,
+              taxation & documentation
+            </p>
+          </div>
+          <div class="text-center p-6">
+            <div
+              class="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 pulse-slow"
+            >
+              <i class="fas fa-user-tie text-blue-600 text-3xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-4">Expert Team</h3>
+            <p class="text-blue-100">
+              Specialized professionals with deep knowledge of Maharashtra
+              Co-operative Act
+            </p>
+          </div>
+          <div class="text-center p-6">
+            <div
+              class="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 pulse-slow"
+            >
+              <i class="fas fa-headset text-blue-600 text-3xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-4">24/7 Support</h3>
+            <p class="text-blue-100">
+              Online and offline support whenever you need assistance
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Testimonials Section -->
     <section id="testimonials" class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">What Our Clients Say</h2>
-                <div class="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
-                <p class="text-xl text-gray-600">Trusted by Housing Societies Across Maharashtra</p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
-                            RS
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-900">Rajesh Sharma</h4>
-                            <p class="text-gray-600 text-sm">Chairman, Sai Palace CHS</p>
-                        </div>
-                    </div>
-                    <div class="flex mb-4">
-                        <i class="fas fa-star text-yellow-400"></i>
-                        <i class="fas fa-star text-yellow-400"></i>
-                        <i class="fas fa-star text-yellow-400"></i>
-                        <i class="fas fa-star text-yellow-400"></i>
-                        <i class="fas fa-star text-yellow-400"></i>
-                    </div>
-                    <p class="text-gray-700 italic">"OWIN completely transformed how we manage our society. Their audit services are thorough and their team is always responsive. Highly recommended for any housing society!"</p>
-                </div>
-
-                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
-                            PD
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-900">Priya Desai</h4>
-                            <p class="text-gray-600 text-sm">Secretary, Green Valley Society</p>
-                        </div>
-                    </div>
-                    <div class="flex mb-4">
-                        <i class="fas fa-star text-yellow-400"></i>
-                        <i class="fas fa-star text-yellow-400"></i>
-                        <i class="fas fa-star text-yellow-400"></i>
-                        <i class="fas fa-star text-yellow-400"></i>
-                        <i class="fas fa-star text-yellow-400"></i>
-                    </div>
-                    <p class="text-gray-700 italic">"We were struggling with GST compliance and tax filings. OWIN handled everything professionally and saved us from potential penalties. Their expertise is invaluable!"</p>
-                </div>
-
-                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
-                            AK
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-900">Amit Kulkarni</h4>
-                            <p class="text-gray-600 text-sm">Treasurer, Sunshine Apartments</p>
-                        </div>
-                    </div>
-                    <div class="flex mb-4">
-                        <i class="fas fa-star text-yellow-400"></i>
-                        <i class="fas fa-star text-yellow-400"></i>
-                        <i class="fas fa-star text-yellow-400"></i>
-                        <i class="fas fa-star text-yellow-400"></i>
-                        <i class="fas fa-star text-yellow-400"></i>
-                    </div>
-                    <p class="text-gray-700 italic">"From society registration to conveyance deed, OWIN guided us through every legal process. Their knowledge of Co-operative Act is exceptional. Best decision we made!"</p>
-                </div>
-            </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-gray-900 mb-4">
+            What Our Clients Say
+          </h2>
+          <div class="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
+          <p class="text-xl text-gray-600">
+            Trusted by Housing Societies Across Maharashtra
+          </p>
         </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div
+            class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition"
+          >
+            <div class="flex items-center mb-6">
+              <div
+                class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4"
+              >
+                RS
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900">Rajesh Sharma</h4>
+                <p class="text-gray-600 text-sm">Chairman, Sai Palace CHS</p>
+              </div>
+            </div>
+            <div class="flex mb-4">
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+            </div>
+            <p class="text-gray-700 italic">
+              "OWIN completely transformed how we manage our society. Their
+              audit services are thorough and their team is always responsive.
+              Highly recommended for any housing society!"
+            </p>
+          </div>
+
+          <div
+            class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition"
+          >
+            <div class="flex items-center mb-6">
+              <div
+                class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4"
+              >
+                PD
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900">Priya Desai</h4>
+                <p class="text-gray-600 text-sm">
+                  Secretary, Green Valley Society
+                </p>
+              </div>
+            </div>
+            <div class="flex mb-4">
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+            </div>
+            <p class="text-gray-700 italic">
+              "We were struggling with GST compliance and tax filings. OWIN
+              handled everything professionally and saved us from potential
+              penalties. Their expertise is invaluable!"
+            </p>
+          </div>
+
+          <div
+            class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition"
+          >
+            <div class="flex items-center mb-6">
+              <div
+                class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4"
+              >
+                AK
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900">Amit Kulkarni</h4>
+                <p class="text-gray-600 text-sm">
+                  Treasurer, Sunshine Apartments
+                </p>
+              </div>
+            </div>
+            <div class="flex mb-4">
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+            </div>
+            <p class="text-gray-700 italic">
+              "From society registration to conveyance deed, OWIN guided us
+              through every legal process. Their knowledge of Co-operative Act
+              is exceptional. Best decision we made!"
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Contact Section -->
     <section id="contact" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">Contact Us</h2>
-                <div class="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
-                <p class="text-xl text-gray-600">Visit Our Offices or Reach Out Online</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-12">
-                <!-- Branch 1 -->
-                <div class="bg-gradient-to-br from-blue-50 to-white p-8 rounded-xl shadow-lg">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Branch 1 - Ulwe</h3>
-                    <div class="space-y-4">
-                        <div class="flex items-start">
-                            <i class="fas fa-map-marker-alt text-blue-600 text-xl mr-4 mt-1"></i>
-                            <p class="text-gray-700">
-                                Office No. 3, Dhree Siddhivinayak CHS,<br>
-                                Plot No. 31, Sector 24,<br>
-                                Ulwe, Navi Mumbai
-                            </p>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-phone text-blue-600 text-xl mr-4"></i>
-                            <a href="tel:+919730712388" class="text-gray-700 hover:text-blue-600">+91 9730712388</a>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-envelope text-blue-600 text-xl mr-4"></i>
-                            <a href="mailto:owinsolution@gmail.com" class="text-gray-700 hover:text-blue-600">owinsolution@gmail.com</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Branch 2 -->
-                <div class="bg-gradient-to-br from-purple-50 to-white p-8 rounded-xl shadow-lg">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Branch 2 - Vashi</h3>
-                    <div class="space-y-4">
-                        <div class="flex items-start">
-                            <i class="fas fa-map-marker-alt text-purple-600 text-xl mr-4 mt-1"></i>
-                            <p class="text-gray-700">
-                                Office No. 524, 6th Floor,<br>
-                                Central Facility Building,<br>
-                                APMC Fruit Market, Vashi, Navi Mumbai
-                            </p>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-phone text-purple-600 text-xl mr-4"></i>
-                            <a href="tel:+919323589780" class="text-gray-700 hover:text-purple-600">+91 93235 89780</a>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-envelope text-purple-600 text-xl mr-4"></i>
-                            <a href="mailto:owinsolution@gmail.com" class="text-gray-700 hover:text-purple-600">owinsolution@gmail.com</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Map -->
-            <div class="mt-12 rounded-xl overflow-hidden shadow-xl">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30167.45!2d73.0!3d19.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDAwJzAwLjAiTiA3M8KwMDAnMDAuMCJF!5e0!3m2!1sen!2sin!4v1234567890" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-            </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-gray-900 mb-4">Contact Us</h2>
+          <div class="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
+          <p class="text-xl text-gray-600">
+            Visit Our Offices or Reach Out Online
+          </p>
         </div>
+
+        <div class="grid md:grid-cols-2 gap-12">
+          <!-- Branch 1 -->
+          <div
+            class="bg-gradient-to-br from-blue-50 to-white p-8 rounded-xl shadow-lg"
+          >
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">
+              Branch 1 - Ulwe
+            </h3>
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <i
+                  class="fas fa-map-marker-alt text-blue-600 text-xl mr-4 mt-1"
+                ></i>
+                <p class="text-gray-700">
+                  Office No. 3, Dhree Siddhivinayak CHS,<br />
+                  Plot No. 31, Sector 24,<br />
+                  Ulwe, Navi Mumbai
+                </p>
+              </div>
+              <div class="flex items-center">
+                <i class="fas fa-phone text-blue-600 text-xl mr-4"></i>
+                <a
+                  href="tel:+919730712388"
+                  class="text-gray-700 hover:text-blue-600"
+                  >+91 9730712388</a
+                >
+              </div>
+              <div class="flex items-center">
+                <i class="fas fa-envelope text-blue-600 text-xl mr-4"></i>
+                <a
+                  href="mailto:owinsolution@gmail.com"
+                  class="text-gray-700 hover:text-blue-600"
+                  >owinsolution@gmail.com</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Branch 2 -->
+          <div
+            class="bg-gradient-to-br from-purple-50 to-white p-8 rounded-xl shadow-lg"
+          >
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">
+              Branch 2 - Vashi
+            </h3>
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <i
+                  class="fas fa-map-marker-alt text-purple-600 text-xl mr-4 mt-1"
+                ></i>
+                <p class="text-gray-700">
+                  Office No. 524, 6th Floor,<br />
+                  Central Facility Building,<br />
+                  APMC Fruit Market, Vashi, Navi Mumbai
+                </p>
+              </div>
+              <div class="flex items-center">
+                <i class="fas fa-phone text-purple-600 text-xl mr-4"></i>
+                <a
+                  href="tel:+919323589780"
+                  class="text-gray-700 hover:text-purple-600"
+                  >+91 93235 89780</a
+                >
+              </div>
+              <div class="flex items-center">
+                <i class="fas fa-envelope text-purple-600 text-xl mr-4"></i>
+                <a
+                  href="mailto:owinsolution@gmail.com"
+                  class="text-gray-700 hover:text-purple-600"
+                  >owinsolution@gmail.com</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Map -->
+        <div class="mt-12 rounded-xl overflow-hidden shadow-xl">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30167.45!2d73.0!3d19.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDAwJzAwLjAiTiA3M8KwMDAnMDAuMCJF!5e0!3m2!1sen!2sin!4v1234567890"
+            width="100%"
+            height="400"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
     </section>
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-2xl font-bold mb-4">OWIN</h3>
-                    <p class="text-gray-400 mb-4">Your trusted partner for complete housing society management, audit, taxation & legal compliance services in Maharashtra.</p>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Quick Links</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#home" class="text-gray-400 hover:text-white transition">Home</a></li>
-                        <li><a href="#about" class="text-gray-400 hover:text-white transition">About Us</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white transition">Services</a></li>
-                        <li><a href="#testimonials" class="text-gray-400 hover:text-white transition">Testimonials</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Services</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#services" class="text-gray-400 hover:text-white transition">Audit Services</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white transition">Taxation</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white transition">Legal Compliance</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white transition">Documentation</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Connect With Us</h4>
-                    <div class="flex space-x-4 mb-4">
-                        <a href="https://wa.me/918419981111" target="_blank" class="bg-green-600 w-10 h-10 rounded-full flex items-center justify-center hover:bg-green-700 transition">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                        <a href="#" class="bg-blue-600 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-700 transition">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-                        <a href="#" class="bg-blue-400 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-500 transition">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                    </div>
-                    <p class="text-gray-400 text-sm">
-                        <i class="fas fa-envelope mr-2"></i>info@owin.in
-                    </p>
-                </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-4 gap-8">
+          <div>
+            <h3 class="text-2xl font-bold mb-4">OWIN</h3>
+            <p class="text-gray-400 mb-4">
+              Your trusted partner for complete housing society management,
+              audit, taxation & legal compliance services in Maharashtra.
+            </p>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-4">Quick Links</h4>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="#home"
+                  class="text-gray-400 hover:text-white transition"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#about"
+                  class="text-gray-400 hover:text-white transition"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#services"
+                  class="text-gray-400 hover:text-white transition"
+                  >Services</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#testimonials"
+                  class="text-gray-400 hover:text-white transition"
+                  >Testimonials</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-4">Services</h4>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="#services"
+                  class="text-gray-400 hover:text-white transition"
+                  >Audit Services</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#services"
+                  class="text-gray-400 hover:text-white transition"
+                  >Taxation</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#services"
+                  class="text-gray-400 hover:text-white transition"
+                  >Legal Compliance</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#services"
+                  class="text-gray-400 hover:text-white transition"
+                  >Documentation</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-4">Connect With Us</h4>
+            <div class="flex space-x-4 mb-4">
+              <a
+                href="https://wa.me/918419981111"
+                target="_blank"
+                class="bg-green-600 w-10 h-10 rounded-full flex items-center justify-center hover:bg-green-700 transition"
+              >
+                <i class="fab fa-whatsapp"></i>
+              </a>
+              <a
+                href="#"
+                class="bg-blue-600 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-700 transition"
+              >
+                <i class="fab fa-facebook"></i>
+              </a>
+              <a
+                href="#"
+                class="bg-blue-400 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-500 transition"
+              >
+                <i class="fab fa-twitter"></i>
+              </a>
             </div>
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2025 OWIN. All rights reserved. | Designed for Excellence in Society Management</p>
-            </div>
+            <p class="text-gray-400 text-sm">
+              <i class="fas fa-envelope mr-2"></i>info@owin.in
+            </p>
+          </div>
         </div>
+        <div
+          class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400"
+        >
+          <p>
+            &copy; 2025 OWIN. All rights reserved. | Designed for Excellence in
+            Society Management
+          </p>
+        </div>
+      </div>
     </footer>
 
     <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/918419981111?text=Hi%2C%20I%20would%20like%20to%20know%20more%20about%20OWIN%20services" target="_blank" class="whatsapp-float">
-        <i class="fab fa-whatsapp"></i>
+    <a
+      href="https://wa.me/918419981111?text=Hi%2C%20I%20would%20like%20to%20know%20more%20about%20OWIN%20services"
+      target="_blank"
+      class="whatsapp-float"
+    >
+      <i class="fab fa-whatsapp"></i>
     </a>
 
     <!-- Enquiry Form Modal -->
-    <div id="enquiryModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div class="p-6 md:p-8">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-3xl font-bold text-gray-900">Get Started with OWIN</h2>
-                    <button onclick="closeEnquiryForm()" class="text-gray-400 hover:text-gray-600 text-3xl">
-                        &times;
-                    </button>
-                </div>
+    <div
+      id="enquiryModal"
+      class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+      >
+        <div class="p-6 md:p-8">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-3xl font-bold text-gray-900">
+              Get Started with OWIN
+            </h2>
+            <button
+              onclick="closeEnquiryForm()"
+              class="text-gray-400 hover:text-gray-600 text-3xl"
+            >
+              &times;
+            </button>
+          </div>
 
-                <!-- Step Indicators -->
-                <div class="flex justify-between mb-8">
-                    <div id="step-ind-1" class="step-indicator step-active w-12 h-12 rounded-full flex items-center justify-center font-bold">1</div>
-                    <div class="flex-1 h-1 bg-gray-200 self-center mx-2"></div>
-                    <div id="step-ind-2" class="step-indicator bg-gray-200 w-12 h-12 rounded-full flex items-center justify-center font-bold">2</div>
-                    <div class="flex-1 h-1 bg-gray-200 self-center mx-2"></div>
-                    <div id="step-ind-3" class="step-indicator bg-gray-200 w-12 h-12 rounded-full flex items-center justify-center font-bold">3</div>
-                    <div class="flex-1 h-1 bg-gray-200 self-center mx-2"></div>
-                    <div id="step-ind-4" class="step-indicator bg-gray-200 w-12 h-12 rounded-full flex items-center justify-center font-bold">4</div>
-                    <div class="flex-1 h-1 bg-gray-200 self-center mx-2"></div>
-                    <div id="step-ind-5" class="step-indicator bg-gray-200 w-12 h-12 rounded-full flex items-center justify-center font-bold">5</div>
-                </div>
-
-                <form id="enquiryForm" onsubmit="submitForm(event)">
-                    <!-- Step 1: Applicant Details -->
-                    <div id="step1" class="form-step">
-                        <h3 class="text-xl font-bold mb-6 text-blue-600">Step 1: Your Details</h3>
-                        <div class="space-y-4">
-                            <div>
-                                <label class="block text-gray-700 font-semibold mb-2">Full Name *</label>
-                                <input type="text" id="fullName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            </div>
-                            <div>
-                                <label class="block text-gray-700 font-semibold mb-2">Mobile Number *</label>
-                                <input type="tel" id="mobile" required pattern="[0-9]{10}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            </div>
-                            <div>
-                                <label class="block text-gray-700 font-semibold mb-2">Email *</label>
-                                <input type="email" id="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            </div>
-                            <div>
-                                <label class="block text-gray-700 font-semibold mb-2">Your Role in Society *</label>
-                                <select id="role" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                    <option value="">Select Role</option>
-                                    <option value="Chairman">Chairman</option>
-                                    <option value="Secretary">Secretary</option>
-                                    <option value="Treasurer">Treasurer</option>
-                                    <option value="Committee Member">Committee Member</option>
-                                    <option value="Builder">Builder</option>
-                                    <option value="Flat Owner">Flat Owner</option>
-                                </select>
-                            </div>
-                        </div>
-                        <button type="button" onclick="nextStep(1)" class="mt-6 w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
-                            Next Step
-                        </button>
-                    </div>
-
-                    <!-- Step 2: Society Details -->
-                    <div id="step2" class="form-step hidden">
-                        <h3 class="text-xl font-bold mb-6 text-blue-600">Step 2: Society Information</h3>
-                        <div class="space-y-4">
-                            <div>
-                                <label class="block text-gray-700 font-semibold mb-2">Society Name *</label>
-                                <input type="text" id="societyName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            </div>
-                            <div>
-                                <label class="block text-gray-700 font-semibold mb-2">Society Address *</label>
-                                <textarea id="societyAddress" required rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
-                            </div>
-                            <div>
-                                <label class="block text-gray-700 font-semibold mb-2">Registration Number</label>
-                                <input type="text" id="regNumber" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            </div>
-                            <div class="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-gray-700 font-semibold mb-2">Total Flats *</label>
-                                    <input type="number" id="totalFlats" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                </div>
-                                <div>
-                                    <label class="block text-gray-700 font-semibold mb-2">Year of Registration</label>
-                                    <input type="number" id="yearReg" min="1900" max="2025" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex gap-4 mt-6">
-                            <button type="button" onclick="prevStep(2)" class="flex-1 bg-gray-300 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-400 transition">
-                                Previous
-                            </button>
-                            <button type="button" onclick="nextStep(2)" class="flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
-                                Next Step
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Step 3: Required Services -->
-                    <div id="step3" class="form-step hidden">
-                        <h3 class="text-xl font-bold mb-6 text-blue-600">Step 3: Select Services Required</h3>
-                        <div class="space-y-3">
-                            <label class="flex items-center p-4 border border-gray-300 rounded-lg hover:bg-blue-50 cursor-pointer">
-                                <input type="checkbox" name="services" value="Audit" class="mr-3 w-5 h-5">
-                                <span class="font-semibold">Audit Services</span>
-                            </label>
-                            <label class="flex items-center p-4 border border-gray-300 rounded-lg hover:bg-blue-50 cursor-pointer">
-                                <input type="checkbox" name="services" value="Taxation" class="mr-3 w-5 h-5">
-                                <span class="font-semibold">Taxation Services</span>
-                            </label>
-                            <label class="flex items-center p-4 border border-gray-300 rounded-lg hover:bg-blue-50 cursor-pointer">
-                                <input type="checkbox" name="services" value="Legal" class="mr-3 w-5 h-5">
-                                <span class="font-semibold">Legal & Compliance</span>
-                            </label>
-                            <label class="flex items-center p-4 border border-gray-300 rounded-lg hover:bg-blue-50 cursor-pointer">
-                                <input type="checkbox" name="services" value="Statutory Registers" class="mr-3 w-5 h-5">
-                                <span class="font-semibold">Statutory Registers</span>
-                            </label>
-                            <label class="flex items-center p-4 border border-gray-300 rounded-lg hover:bg-blue-50 cursor-pointer">
-                                <input type="checkbox" name="services" value="Complete Society Management" class="mr-3 w-5 h-5">
-                                <span class="font-semibold">Complete Society Management</span>
-                            </label>
-                            <div>
-                                <label class="block text-gray-700 font-semibold mb-2">Other Services</label>
-                                <input type="text" id="otherServices" placeholder="Specify other services needed" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            </div>
-                        </div>
-                        <div class="flex gap-4 mt-6">
-                            <button type="button" onclick="prevStep(3)" class="flex-1 bg-gray-300 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-400 transition">
-                                Previous
-                            </button>
-                            <button type="button" onclick="nextStep(3)" class="flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
-                                Next Step
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Step 4: Additional Notes -->
-                    <div id="step4" class="form-step hidden">
-                        <h3 class="text-xl font-bold mb-6 text-blue-600">Step 4: Tell Us More</h3>
-                        <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Describe Your Requirements / Issues</label>
-                            <textarea id="additionalNotes" rows="6" placeholder="Please describe any specific problems or requirements your society is facing..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
-                        </div>
-                        <div class="flex gap-4 mt-6">
-                            <button type="button" onclick="prevStep(4)" class="flex-1 bg-gray-300 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-400 transition">
-                                Previous
-                            </button>
-                            <button type="button" onclick="nextStep(4)" class="flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
-                                Review & Submit
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Step 5: Confirmation -->
-                    <div id="step5" class="form-step hidden">
-                        <div class="text-center">
-                            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                                <i class="fas fa-check text-green-600 text-4xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold mb-4 text-gray-900">Thank You!</h3>
-                            <p class="text-gray-600 mb-6">Your enquiry has been submitted successfully. Our team will contact you shortly via WhatsApp and Email.</p>
-                            <div class="bg-blue-50 p-6 rounded-lg mb-6">
-                                <p class="font-semibold text-gray-900 mb-2">Connect with us on WhatsApp now:</p>
-                                <a href="https://wa.me/918419981111?text=Hi%2C%20I%20just%20submitted%20an%20enquiry%20form" target="_blank" class="inline-block bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition">
-                                    <i class="fab fa-whatsapp mr-2"></i>Chat on WhatsApp
-                                </a>
-                            </div>
-                            <button type="button" onclick="closeEnquiryForm()" class="text-blue-600 hover:text-blue-700 font-semibold">
-                                Close
-                            </button>
-                        </div>
-                    </div>
-                </form>
+          <!-- Step Indicators -->
+          <div class="flex justify-between mb-8">
+            <div
+              id="step-ind-1"
+              class="step-indicator step-active w-12 h-12 rounded-full flex items-center justify-center font-bold"
+            >
+              1
             </div>
+            <div class="flex-1 h-1 bg-gray-200 self-center mx-2"></div>
+            <div
+              id="step-ind-2"
+              class="step-indicator bg-gray-200 w-12 h-12 rounded-full flex items-center justify-center font-bold"
+            >
+              2
+            </div>
+            <div class="flex-1 h-1 bg-gray-200 self-center mx-2"></div>
+            <div
+              id="step-ind-3"
+              class="step-indicator bg-gray-200 w-12 h-12 rounded-full flex items-center justify-center font-bold"
+            >
+              3
+            </div>
+            <div class="flex-1 h-1 bg-gray-200 self-center mx-2"></div>
+            <div
+              id="step-ind-4"
+              class="step-indicator bg-gray-200 w-12 h-12 rounded-full flex items-center justify-center font-bold"
+            >
+              4
+            </div>
+            <div class="flex-1 h-1 bg-gray-200 self-center mx-2"></div>
+            <div
+              id="step-ind-5"
+              class="step-indicator bg-gray-200 w-12 h-12 rounded-full flex items-center justify-center font-bold"
+            >
+              5
+            </div>
+          </div>
+
+          <form id="enquiryForm" onsubmit="submitForm(event)">
+            <!-- Step 1: Applicant Details -->
+            <div id="step1" class="form-step">
+              <h3 class="text-xl font-bold mb-6 text-blue-600">
+                Step 1: Your Details
+              </h3>
+              <div class="space-y-4">
+                <div>
+                  <label class="block text-gray-700 font-semibold mb-2"
+                    >Full Name *</label
+                  >
+                  <input
+                    type="text"
+                    id="fullName"
+                    required
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+                <div>
+                  <label class="block text-gray-700 font-semibold mb-2"
+                    >Mobile Number *</label
+                  >
+                  <input
+                    type="tel"
+                    id="mobile"
+                    required
+                    pattern="[0-9]{10}"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+                <div>
+                  <label class="block text-gray-700 font-semibold mb-2"
+                    >Email *</label
+                  >
+                  <input
+                    type="email"
+                    id="email"
+                    required
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+                <div>
+                  <label class="block text-gray-700 font-semibold mb-2"
+                    >Your Role in Society *</label
+                  >
+                  <select
+                    id="role"
+                    required
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  >
+                    <option value="">Select Role</option>
+                    <option value="Chairman">Chairman</option>
+                    <option value="Secretary">Secretary</option>
+                    <option value="Treasurer">Treasurer</option>
+                    <option value="Committee Member">Committee Member</option>
+                    <option value="Builder">Builder</option>
+                    <option value="Flat Owner">Flat Owner</option>
+                  </select>
+                </div>
+              </div>
+              <button
+                type="button"
+                onclick="nextStep(1)"
+                class="mt-6 w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+              >
+                Next Step
+              </button>
+            </div>
+
+            <!-- Step 2: Society Details -->
+            <div id="step2" class="form-step hidden">
+              <h3 class="text-xl font-bold mb-6 text-blue-600">
+                Step 2: Society Information
+              </h3>
+              <div class="space-y-4">
+                <div>
+                  <label class="block text-gray-700 font-semibold mb-2"
+                    >Society Name *</label
+                  >
+                  <input
+                    type="text"
+                    id="societyName"
+                    required
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+                <div>
+                  <label class="block text-gray-700 font-semibold mb-2"
+                    >Society Address *</label
+                  >
+                  <textarea
+                    id="societyAddress"
+                    required
+                    rows="3"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  ></textarea>
+                </div>
+                <div>
+                  <label class="block text-gray-700 font-semibold mb-2"
+                    >Registration Number</label
+                  >
+                  <input
+                    type="text"
+                    id="regNumber"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-gray-700 font-semibold mb-2"
+                      >Total Flats *</label
+                    >
+                    <input
+                      type="number"
+                      id="totalFlats"
+                      required
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                  </div>
+                  <div>
+                    <label class="block text-gray-700 font-semibold mb-2"
+                      >Year of Registration</label
+                    >
+                    <input
+                      type="number"
+                      id="yearReg"
+                      min="1900"
+                      max="2025"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="flex gap-4 mt-6">
+                <button
+                  type="button"
+                  onclick="prevStep(2)"
+                  class="flex-1 bg-gray-300 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-400 transition"
+                >
+                  Previous
+                </button>
+                <button
+                  type="button"
+                  onclick="nextStep(2)"
+                  class="flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+                >
+                  Next Step
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 3: Required Services -->
+            <div id="step3" class="form-step hidden">
+              <h3 class="text-xl font-bold mb-6 text-blue-600">
+                Step 3: Select Services Required
+              </h3>
+              <div class="space-y-3">
+                <label
+                  class="flex items-center p-4 border border-gray-300 rounded-lg hover:bg-blue-50 cursor-pointer"
+                >
+                  <input
+                    type="checkbox"
+                    name="services"
+                    value="Audit"
+                    class="mr-3 w-5 h-5"
+                  />
+                  <span class="font-semibold">Audit Services</span>
+                </label>
+                <label
+                  class="flex items-center p-4 border border-gray-300 rounded-lg hover:bg-blue-50 cursor-pointer"
+                >
+                  <input
+                    type="checkbox"
+                    name="services"
+                    value="Taxation"
+                    class="mr-3 w-5 h-5"
+                  />
+                  <span class="font-semibold">Taxation Services</span>
+                </label>
+                <label
+                  class="flex items-center p-4 border border-gray-300 rounded-lg hover:bg-blue-50 cursor-pointer"
+                >
+                  <input
+                    type="checkbox"
+                    name="services"
+                    value="Legal"
+                    class="mr-3 w-5 h-5"
+                  />
+                  <span class="font-semibold">Legal & Compliance</span>
+                </label>
+                <label
+                  class="flex items-center p-4 border border-gray-300 rounded-lg hover:bg-blue-50 cursor-pointer"
+                >
+                  <input
+                    type="checkbox"
+                    name="services"
+                    value="Statutory Registers"
+                    class="mr-3 w-5 h-5"
+                  />
+                  <span class="font-semibold">Statutory Registers</span>
+                </label>
+                <label
+                  class="flex items-center p-4 border border-gray-300 rounded-lg hover:bg-blue-50 cursor-pointer"
+                >
+                  <input
+                    type="checkbox"
+                    name="services"
+                    value="Complete Society Management"
+                    class="mr-3 w-5 h-5"
+                  />
+                  <span class="font-semibold">Complete Society Management</span>
+                </label>
+                <div>
+                  <label class="block text-gray-700 font-semibold mb-2"
+                    >Other Services</label
+                  >
+                  <input
+                    type="text"
+                    id="otherServices"
+                    placeholder="Specify other services needed"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+              </div>
+              <div class="flex gap-4 mt-6">
+                <button
+                  type="button"
+                  onclick="prevStep(3)"
+                  class="flex-1 bg-gray-300 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-400 transition"
+                >
+                  Previous
+                </button>
+                <button
+                  type="button"
+                  onclick="nextStep(3)"
+                  class="flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+                >
+                  Next Step
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 4: Additional Notes -->
+            <div id="step4" class="form-step hidden">
+              <h3 class="text-xl font-bold mb-6 text-blue-600">
+                Step 4: Tell Us More
+              </h3>
+              <div>
+                <label class="block text-gray-700 font-semibold mb-2"
+                  >Describe Your Requirements / Issues</label
+                >
+                <textarea
+                  id="additionalNotes"
+                  rows="6"
+                  placeholder="Please describe any specific problems or requirements your society is facing..."
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                ></textarea>
+              </div>
+              <div class="flex gap-4 mt-6">
+                <button
+                  type="button"
+                  onclick="prevStep(4)"
+                  class="flex-1 bg-gray-300 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-400 transition"
+                >
+                  Previous
+                </button>
+                <button
+                  type="button"
+                  onclick="nextStep(4)"
+                  class="flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+                >
+                  Review & Submit
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 5: Confirmation -->
+            <div id="step5" class="form-step hidden">
+              <div class="text-center">
+                <div
+                  class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6"
+                >
+                  <i class="fas fa-check text-green-600 text-4xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-gray-900">
+                  Thank You!
+                </h3>
+                <p class="text-gray-600 mb-6">
+                  Your enquiry has been submitted successfully. Our team will
+                  contact you shortly via WhatsApp and Email.
+                </p>
+                <div class="bg-blue-50 p-6 rounded-lg mb-6">
+                  <p class="font-semibold text-gray-900 mb-2">
+                    Connect with us on WhatsApp now:
+                  </p>
+                  <a
+                    href="https://wa.me/918419981111?text=Hi%2C%20I%20just%20submitted%20an%20enquiry%20form"
+                    target="_blank"
+                    class="inline-block bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition"
+                  >
+                    <i class="fab fa-whatsapp mr-2"></i>Chat on WhatsApp
+                  </a>
+                </div>
+                <button
+                  type="button"
+                  onclick="closeEnquiryForm()"
+                  class="text-blue-600 hover:text-blue-700 font-semibold"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
+      </div>
     </div>
 
     <script>
-        // Mobile Menu Toggle
-        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
+      // Mobile Menu Toggle
+      document
+        .getElementById("mobile-menu-btn")
+        .addEventListener("click", function () {
+          const menu = document.getElementById("mobile-menu");
+          menu.classList.toggle("hidden");
         });
 
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', function() {
-                document.getElementById('mobile-menu').classList.add('hidden');
-            });
+      // Close mobile menu when clicking a link
+      document.querySelectorAll("#mobile-menu a").forEach((link) => {
+        link.addEventListener("click", function () {
+          document.getElementById("mobile-menu").classList.add("hidden");
+        });
+      });
+
+      // Enquiry Form Functions
+      let currentStep = 1;
+
+      function openEnquiryForm() {
+        document.getElementById("enquiryModal").classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeEnquiryForm() {
+        document.getElementById("enquiryModal").classList.add("hidden");
+        document.body.style.overflow = "auto";
+        resetForm();
+      }
+
+      function resetForm() {
+        currentStep = 1;
+        document.getElementById("enquiryForm").reset();
+        document
+          .querySelectorAll(".form-step")
+          .forEach((step) => step.classList.add("hidden"));
+        document.getElementById("step1").classList.remove("hidden");
+        updateStepIndicators();
+      }
+
+      function nextStep(step) {
+        // Validate current step
+        const currentStepElement = document.getElementById(`step${step}`);
+        const inputs = currentStepElement.querySelectorAll(
+          "input[required], select[required], textarea[required]"
+        );
+        let valid = true;
+
+        inputs.forEach((input) => {
+          if (!input.value) {
+            valid = false;
+            input.classList.add("border-red-500");
+          } else {
+            input.classList.remove("border-red-500");
+          }
         });
 
-        // Enquiry Form Functions
-        let currentStep = 1;
-
-        function openEnquiryForm() {
-            document.getElementById('enquiryModal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
+        if (!valid && step < 5) {
+          alert("Please fill in all required fields");
+          return;
         }
 
-        function closeEnquiryForm() {
-            document.getElementById('enquiryModal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-            resetForm();
+        if (currentStep < 5) {
+          document.getElementById(`step${currentStep}`).classList.add("hidden");
+          currentStep++;
+          document
+            .getElementById(`step${currentStep}`)
+            .classList.remove("hidden");
+          updateStepIndicators();
         }
+      }
 
-        function resetForm() {
-            currentStep = 1;
-            document.getElementById('enquiryForm').reset();
-            document.querySelectorAll('.form-step').forEach(step => step.classList.add('hidden'));
-            document.getElementById('step1').classList.remove('hidden');
-            updateStepIndicators();
+      function prevStep(step) {
+        if (currentStep > 1) {
+          document.getElementById(`step${currentStep}`).classList.add("hidden");
+          currentStep--;
+          document
+            .getElementById(`step${currentStep}`)
+            .classList.remove("hidden");
+          updateStepIndicators();
         }
+      }
 
-        function nextStep(step) {
-            // Validate current step
-            const currentStepElement = document.getElementById(`step${step}`);
-            const inputs = currentStepElement.querySelectorAll('input[required], select[required], textarea[required]');
-            let valid = true;
+      function updateStepIndicators() {
+        for (let i = 1; i <= 5; i++) {
+          const indicator = document.getElementById(`step-ind-${i}`);
+          if (i < currentStep) {
+            indicator.classList.remove("step-active", "bg-gray-200");
+            indicator.classList.add("step-completed");
+          } else if (i === currentStep) {
+            indicator.classList.remove("step-completed", "bg-gray-200");
+            indicator.classList.add("step-active");
+          } else {
+            indicator.classList.remove("step-active", "step-completed");
+            indicator.classList.add("bg-gray-200");
+          }
+        }
+      }
 
-            inputs.forEach(input => {
-                if (!input.value) {
-                    valid = false;
-                    input.classList.add('border-red-500');
-                } else {
-                    input.classList.remove('border-red-500');
-                }
-            });
+      function submitForm(event) {
+        event.preventDefault();
 
-            if (!valid && step < 5) {
-                alert('Please fill in all required fields');
-                return;
+        // Collect form data
+        const formData = {
+          fullName: document.getElementById("fullName").value,
+          mobile: document.getElementById("mobile").value,
+          email: document.getElementById("email").value,
+          role: document.getElementById("role").value,
+          societyName: document.getElementById("societyName").value,
+          societyAddress: document.getElementById("societyAddress").value,
+          regNumber: document.getElementById("regNumber").value,
+          totalFlats: document.getElementById("totalFlats").value,
+          yearReg: document.getElementById("yearReg").value,
+          services: Array.from(
+            document.querySelectorAll('input[name="services"]:checked')
+          ).map((cb) => cb.value),
+          otherServices: document.getElementById("otherServices").value,
+          additionalNotes: document.getElementById("additionalNotes").value,
+        };
+
+        // Create WhatsApp message
+        const whatsappMessage =
+          `*New Enquiry from OWIN Website*%0A%0A` +
+          `*Applicant Details:*%0A` +
+          `Name: ${formData.fullName}%0A` +
+          `Mobile: ${formData.mobile}%0A` +
+          `Email: ${formData.email}%0A` +
+          `Role: ${formData.role}%0A%0A` +
+          `*Society Details:*%0A` +
+          `Society: ${formData.societyName}%0A` +
+          `Address: ${formData.societyAddress}%0A` +
+          `Reg No: ${formData.regNumber}%0A` +
+          `Total Flats: ${formData.totalFlats}%0A` +
+          `Year: ${formData.yearReg}%0A%0A` +
+          `*Services Required:*%0A${formData.services.join(", ")}%0A` +
+          `Other: ${formData.otherServices}%0A%0A` +
+          `*Additional Notes:*%0A${formData.additionalNotes}`;
+
+        // Send to WhatsApp (replace with your number)
+        window.open(
+          `https://wa.me/918419981111?text=${whatsappMessage}`,
+          "_blank"
+        );
+
+        // Create email body
+        const emailBody =
+          `New Enquiry from OWIN Website\n\n` +
+          `Applicant Details:\n` +
+          `Name: ${formData.fullName}\n` +
+          `Mobile: ${formData.mobile}\n` +
+          `Email: ${formData.email}\n` +
+          `Role: ${formData.role}\n\n` +
+          `Society Details:\n` +
+          `Society: ${formData.societyName}\n` +
+          `Address: ${formData.societyAddress}\n` +
+          `Reg No: ${formData.regNumber}\n` +
+          `Total Flats: ${formData.totalFlats}\n` +
+          `Year: ${formData.yearReg}\n\n` +
+          `Services Required: ${formData.services.join(", ")}\n` +
+          `Other: ${formData.otherServices}\n\n` +
+          `Additional Notes:\n${formData.additionalNotes}`;
+
+        // Send email (Note: This opens default email client. For actual sending, you need backend integration)
+        window.location.href = `mailto:owinsolution@gmail.com?subject=New Enquiry from ${
+          formData.fullName
+        }&body=${encodeURIComponent(emailBody)}`;
+
+        // Show confirmation step
+        nextStep(4);
+      }
+
+      // Scroll animations
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("fade-in-up");
             }
+          });
+        },
+        { threshold: 0.1 }
+      );
 
-            if (currentStep < 5) {
-                document.getElementById(`step${currentStep}`).classList.add('hidden');
-                currentStep++;
-                document.getElementById(`step${currentStep}`).classList.remove('hidden');
-                updateStepIndicators();
-            }
-        }
+      document.querySelectorAll("section").forEach((section) => {
+        observer.observe(section);
+      });
 
-        function prevStep(step) {
-            if (currentStep > 1) {
-                document.getElementById(`step${currentStep}`).classList.add('hidden');
-                currentStep--;
-                document.getElementById(`step${currentStep}`).classList.remove('hidden');
-                updateStepIndicators();
-            }
-        }
-
-        function updateStepIndicators() {
-            for (let i = 1; i <= 5; i++) {
-                const indicator = document.getElementById(`step-ind-${i}`);
-                if (i < currentStep) {
-                    indicator.classList.remove('step-active', 'bg-gray-200');
-                    indicator.classList.add('step-completed');
-                } else if (i === currentStep) {
-                    indicator.classList.remove('step-completed', 'bg-gray-200');
-                    indicator.classList.add('step-active');
-                } else {
-                    indicator.classList.remove('step-active', 'step-completed');
-                    indicator.classList.add('bg-gray-200');
-                }
-            }
-        }
-
-        function submitForm(event) {
-            event.preventDefault();
-            
-            // Collect form data
-            const formData = {
-                fullName: document.getElementById('fullName').value,
-                mobile: document.getElementById('mobile').value,
-                email: document.getElementById('email').value,
-                role: document.getElementById('role').value,
-                societyName: document.getElementById('societyName').value,
-                societyAddress: document.getElementById('societyAddress').value,
-                regNumber: document.getElementById('regNumber').value,
-                totalFlats: document.getElementById('totalFlats').value,
-                yearReg: document.getElementById('yearReg').value,
-                services: Array.from(document.querySelectorAll('input[name="services"]:checked')).map(cb => cb.value),
-                otherServices: document.getElementById('otherServices').value,
-                additionalNotes: document.getElementById('additionalNotes').value
-            };
-
-            // Create WhatsApp message
-            const whatsappMessage = `*New Enquiry from OWIN Website*%0A%0A` +
-                `*Applicant Details:*%0A` +
-                `Name: ${formData.fullName}%0A` +
-                `Mobile: ${formData.mobile}%0A` +
-                `Email: ${formData.email}%0A` +
-                `Role: ${formData.role}%0A%0A` +
-                `*Society Details:*%0A` +
-                `Society: ${formData.societyName}%0A` +
-                `Address: ${formData.societyAddress}%0A` +
-                `Reg No: ${formData.regNumber}%0A` +
-                `Total Flats: ${formData.totalFlats}%0A` +
-                `Year: ${formData.yearReg}%0A%0A` +
-                `*Services Required:*%0A${formData.services.join(', ')}%0A` +
-                `Other: ${formData.otherServices}%0A%0A` +
-                `*Additional Notes:*%0A${formData.additionalNotes}`;
-
-            // Send to WhatsApp (replace with your number)
-            window.open(`https://wa.me/918419981111?text=${whatsappMessage}`, '_blank');
-
-            // Create email body
-            const emailBody = `New Enquiry from OWIN Website\n\n` +
-                `Applicant Details:\n` +
-                `Name: ${formData.fullName}\n` +
-                `Mobile: ${formData.mobile}\n` +
-                `Email: ${formData.email}\n` +
-                `Role: ${formData.role}\n\n` +
-                `Society Details:\n` +
-                `Society: ${formData.societyName}\n` +
-                `Address: ${formData.societyAddress}\n` +
-                `Reg No: ${formData.regNumber}\n` +
-                `Total Flats: ${formData.totalFlats}\n` +
-                `Year: ${formData.yearReg}\n\n` +
-                `Services Required: ${formData.services.join(', ')}\n` +
-                `Other: ${formData.otherServices}\n\n` +
-                `Additional Notes:\n${formData.additionalNotes}`;
-
-            // Send email (Note: This opens default email client. For actual sending, you need backend integration)
-            window.location.href = `mailto:owinsolution@gmail.com?subject=New Enquiry from ${formData.fullName}&body=${encodeURIComponent(emailBody)}`;
-
-            // Show confirmation step
-            nextStep(4);
-        }
-
-        // Scroll animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in-up');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
-        });
-
-        // Close modal when clicking outside
-        document.getElementById('enquiryModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeEnquiryForm();
-            }
+      // Close modal when clicking outside
+      document
+        .getElementById("enquiryModal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) {
+            closeEnquiryForm();
+          }
         });
     </script>
-</body>
+    <script>
+      window.va =
+        window.va ||
+        function () {
+          (window.vaq = window.vaq || []).push(arguments);
+        };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <script>
+      window.si =
+        window.si ||
+        function () {
+          (window.siq = window.siq || []).push(arguments);
+        };
+    </script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+  </body>
 </html>
