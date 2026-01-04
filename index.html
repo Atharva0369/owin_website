@@ -1406,22 +1406,37 @@
         event.preventDefault();
 
         // Collect form data
-        const formData = {
-          fullName: document.getElementById("fullName").value,
-          mobile: document.getElementById("mobile").value,
-          email: document.getElementById("email").value,
-          role: document.getElementById("role").value,
-          societyName: document.getElementById("societyName").value,
-          societyAddress: document.getElementById("societyAddress").value,
-          regNumber: document.getElementById("regNumber").value,
-          totalFlats: document.getElementById("totalFlats").value,
-          yearReg: document.getElementById("yearReg").value,
-          services: Array.from(
-            document.querySelectorAll('input[name="services"]:checked')
-          ).map((cb) => cb.value),
-          otherServices: document.getElementById("otherServices").value,
-          additionalNotes: document.getElementById("additionalNotes").value,
-        };
+        const templateParams = {
+    full_name: formData.fullName,
+    mobile: formData.mobile,
+    email: formData.email,
+    role: formData.role,
+    society_name: formData.societyName,
+    society_address: formData.societyAddress,
+    reg_number: formData.regNumber,
+    total_flats: formData.totalFlats,
+    year_reg: formData.yearReg,
+    services: formData.services.join(", "),
+    other_services: formData.otherServices,
+    additional_notes: formData.additionalNotes,
+  };
+
+  emailjs
+    .send(
+      service_swxuz5r,
+      template_e4t3h3t,
+      templateParams
+    )
+    .then(
+      function () {
+        alert("Enquiry submitted successfully!");
+        nextStep(4);
+      },
+      function (error) {
+        alert("Failed to send enquiry. Please try again.");
+        console.error(error);
+      }
+    );
 
         // Create WhatsApp message
         const whatsappMessage =
